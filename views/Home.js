@@ -17,7 +17,11 @@ export function Home({ navigation }) {
         <View style={styles.base}>
             <View style={styles.container}>
                 <Text style={styles.title}>Welcome to anci!</Text>
-                <TouchableOpacity style={styles.buttonContainer} onPress={navigation.navigate('Login')}>
+
+                {/* When oauth finishes, a function call like this should happen.
+                {/* setAuth({success: true, token: "abc123"})} */}
+
+                <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.buttonText}>Log in</Text>
                 </TouchableOpacity>
                 { LoginButton }
