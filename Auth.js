@@ -4,6 +4,7 @@ import PopupWindow from 'react-github-login/src/PopupWindow'
 import { TouchableOpacity, Text } from 'react-native';
 import styles from './static/Style'
 
+
 function getAuth() {
     const query = "client_id=13f6352ecd93ee690191&redirectUri=http://localhost:3000/auth/get_code"
     const url = "https://github.com/login/oauth/authorize?" + query;
@@ -22,7 +23,8 @@ function getAuth() {
             // close listener when message recieved
             window.removeEventListener("message", recieveMessage, false);
 
-            // add hooks here: we have our auth stored in event.data!
+            // add hooks here
+            // setAuth({success: true, token: "abc123"});
         }
     }
 }
