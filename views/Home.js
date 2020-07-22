@@ -11,13 +11,14 @@ export function Home({ navigation }) {
 
     useEffect(() => {
         if(auth.success) navigation.navigate("Authenticated", {auth});
+        // Eventually, something should happen is the auth attempt is unsuccessful.
     }, [auth]);
 
     return (
         <View style={styles.base}>
             <View style={styles.container}>
                 <Text style={styles.title}>Welcome to anci!</Text>
-                { LoginButton }
+                <LoginButton setAuth={setAuth} />
                 <Image source={logo} style={styles.logo}/>
             </View>
         </View>

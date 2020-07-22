@@ -5,7 +5,7 @@ import { TouchableOpacity, Text } from 'react-native';
 import styles from './static/Style'
 
 
-function getAuth() {
+function getAuth(setAuth) {
     const query = "client_id=13f6352ecd93ee690191&redirectUri=http://localhost:3000/auth/get_code"
     const url = "https://github.com/login/oauth/authorize?" + query;
     const tab = window.open(url);
@@ -18,21 +18,23 @@ function getAuth() {
             console.log("Wrong domain!");
 
         } else {
-            console.log(event.data);
             tab.close();
             // close listener when message recieved
             window.removeEventListener("message", recieveMessage, false);
 
             // add hooks here
-            // setAuth({success: true, token: "abc123"});
+            setAuth({...JSON.parse(event.data), success: true});
         }
     }
 }
 
-const LoginButton = (
-    <TouchableOpacity style={styles.buttonContainer} onPress={getAuth}>
-        <Text style={styles.buttonText}>Log in</Text>
-    </TouchableOpacity>
-);
+function LoginButton(props) {
+    return (
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => getAuth(props.setAuth)}>
+            <Text style={styles.buttonText}>Log in</Text>
+        </TouchableOpacity>
+    );
+}
+
 
 export {LoginButton};
