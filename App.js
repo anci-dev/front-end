@@ -33,7 +33,7 @@ function LandingPad(props) {
                         drawerType={"permanent"}
                         drawerStyle={{backgroundColor: "#212128"}}
                         drawerContentOptions={{
-                            inactiveTintColor: "#2a70f0",
+                            activeTintColor: "#2a70f0",
                             inactiveTintColor: "#97BEE5",
                         }}>
                     <Drawer.Screen name="Dashboard" component={Dashboard} initialParams={props.route.params}/>
