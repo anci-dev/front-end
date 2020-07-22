@@ -8,7 +8,6 @@ import { Dashboard } from './views/Dashboard'
 import { Settings } from './views/Settings'
 import { RepoStatus } from './views/RepoStatus'
 import { BuildStatus } from './views/BuildStatus'
-import globalStyle from './static/Style'
 
 const Stack = createStackNavigator();
 
@@ -37,5 +36,4 @@ export default function App() {
     }
 }
 
-// {...globalStyle, style dict specific to this component}
-const styles = StyleSheet.create(globalStyle);
+// compose(globalStyle, style specific to this component)

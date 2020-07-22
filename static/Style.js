@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 const colors = {
     base: '#212128',
     contrast: '#97BEE5',
@@ -39,4 +41,4 @@ const globalStyle = {
     }
 };
 
-export default globalStyle;
+export default StyleSheet.create(globalStyle);
