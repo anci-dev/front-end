@@ -17,9 +17,6 @@ export function Home({ navigation }) {
         <View style={styles.base}>
             <View style={styles.container}>
                 <Text style={styles.title}>Welcome to anci!</Text>
-                <TouchableOpacity style={styles.buttonContainer} onPress={navigation.navigate('Login')}>
-                    <Text style={styles.buttonText}>Log in</Text>
-                </TouchableOpacity>
                 { LoginButton }
                 <Image source={logo} style={styles.logo}/>
             </View>

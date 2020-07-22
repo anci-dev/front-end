@@ -4,54 +4,33 @@ import PopupWindow from 'react-github-login/src/PopupWindow'
 import { TouchableOpacity, Text } from 'react-native';
 import styles from './static/Style'
 
-function callBackend(codeResponse) {
-    fetch("http://localhost:3000/auth/get_token?code=" + codeResponse.code)
-    .then(response => response.json())
-    .then(result => {
-        console.log('Success:', result);
-        console.log(result.access_token);
-    });
-    // todo error catching
-}
-
-// Pulled code from react-github-logic/src/GitHubLogin.js
-// in order to implement PopupWindow so that a custom button
-// could trigger a new PopupWindow
-function getCode() {
-    console.log("here");
+function getAuth() {
     const query = "client_id=13f6352ecd93ee690191&redirectUri=http://localhost:3000/auth/get_code"
+    const url = "https://github.com/login/oauth/authorize?" + query;
+    const tab = window.open(url);
 
-    window.open("https://github.com/login/oauth/authorize?" + query);
+    // add listener to recieve messages
+    window.addEventListener("message", recieveMessage, false);
 
+    function recieveMessage(event) {
+        if (event.origin !== "http://localhost:3000") {
+            console.log("Wrong domain!");
 
-    // const popup = PopupWindow.open(
-    //     'github-oauth-authorize',
-    //     'https://github.com/login/oauth/authorize?' + query,
-    //     { height: 1000, width: 600 }
-    // );
-    //
-    // popup.then(
-    //     data => console.log(data),
-    //     error => console.log(error)
-    // );
+        } else {
+            console.log(event.data);
+            tab.close();
+            // close listener when message recieved
+            window.removeEventListener("message", recieveMessage, false);
 
-    // fetch("https://github.com/login/oauth/authorize?client_id=13f6352ecd93ee690191&redirectUri=http://localhost:19006/auth/github/login/return")
-    // .then(response => response.json())
-    // .then(result => {
-    //     console.log('Success:', result);
-    // });
-    // todo error catching
+            // add hooks here: we have our auth stored in event.data!
+        }
+    }
 }
-const onFailure = response => console.error(response);
 
 const LoginButton = (
-    <TouchableOpacity style={styles.buttonContainer} onPress={getCode}>
+    <TouchableOpacity style={styles.buttonContainer} onPress={getAuth}>
         <Text style={styles.buttonText}>Log in</Text>
     </TouchableOpacity>
-  //   <GitHubLogin clientId="13f6352ecd93ee690191"
-  //   redirectUri="http://localhost:19006/auth/github/login/return"
-  // onSuccess={callBackend}
-  // onFailure={onFailure}/>
 );
 
 export {LoginButton};
