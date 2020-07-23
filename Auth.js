@@ -12,8 +12,9 @@ const COOKIE_OPTIONS = {
 function getAuth(setAuth, setProcessing) {
     setProcessing(true);
 
+    const scopes = "scope=repo"; // space-delimited list of scopes
     const query = "client_id=13f6352ecd93ee690191&redirectUri=http://localhost:3000/auth/get_code"
-    const url = "https://github.com/login/oauth/authorize?" + query;
+    const url = `https://github.com/login/oauth/authorize?${query}&${scopes}`;
     const tab = window.open(url);
 
     // add listener to recieve messages
@@ -37,6 +38,14 @@ function getAuth(setAuth, setProcessing) {
     }
 }
 
+function logout(setAuth) {
+    // technically a successful logout?
+    // may want a new variable to represent login/out status?
+    setAuth({success: false});
+    Cookies.remove("auth");
+    console.log("Logout!");
+}
+
 function LoginButton(props) {
     const [processing, setProcessing] = useState(false);
 
@@ -49,5 +58,12 @@ function LoginButton(props) {
     );
 }
 
+function LogoutButton(props) {
+    return (
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => logout(props.setAuth)}>
+            <Text style={styles.buttonText}>Log out</Text>
+        </TouchableOpacity>
+    );
+}
 
-export {LoginButton};
+export {LoginButton, LogoutButton};
