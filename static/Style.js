@@ -38,7 +38,24 @@ const globalStyle = {
         height: 450,
         width: 150,
         resizeMode: "contain",
-    }
+    },
+    list: {
+        height: "100%",
+        width: "100%",
+        padding: 15
+    },
+    profileImage: {
+        height: 50,
+        width: 50,
+        resizeMode: "contain",
+    },
+    repoOverview: {
+        backgroundColor: colors.contrast,
+        color: colors.base,
+        borderColor: colors.base,
+        borderWidth: 2,
+        marginTop: 5,
+    },
 };
 
 export default StyleSheet.create(globalStyle);

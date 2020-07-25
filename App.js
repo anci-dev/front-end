@@ -37,7 +37,7 @@ function LandingPad(props) {
                         }}>
                     <Text style={styles.buttonText}>Log out</Text>
                 </TouchableOpacity>
-                <Drawer.Navigator initialRouteName="Dashboard"
+                <Drawer.Navigator initialRouteName="Repo Status"
                         drawerType={"permanent"}
                         drawerStyle={{backgroundColor: "#212128"}}
                         drawerContentOptions={{
