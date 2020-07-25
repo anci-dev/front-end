@@ -42,14 +42,6 @@ function getAuth(setAuth, setProcessing) {
     }
 }
 
-function logout(setAuth) {
-    // technically a successful logout?
-    // may want a new variable to represent login/out status?
-    setAuth({success: false});
-    Cookies.remove("auth");
-    console.log("Logout!");
-}
-
 function LoginButton(props) {
     const [processing, setProcessing] = useState(false);
 
@@ -62,12 +54,4 @@ function LoginButton(props) {
     );
 }
 
-function LogoutButton(props) {
-    return (
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => logout(props.setAuth)}>
-            <Text style={styles.buttonText}>Log out</Text>
-        </TouchableOpacity>
-    );
-}
-
-export {LoginButton, LogoutButton};
+export {LoginButton};

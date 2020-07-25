@@ -11,8 +11,12 @@ export function Home({ navigation }) {
     const [auth, setAuth] = useState(Cookies.getJSON("auth") || {});
 
     useEffect(() => {
-        if(auth.success) navigation.navigate("Authenticated", {auth});
-        // Eventually, something should probably happen if the auth attempt is unsuccessful.
+        if(auth.success) {
+            navigation.navigate("Authenticated", {auth, setAuth});
+        } else {
+            navigation.navigate("Login");
+            // Eventually, something should probably happen if the auth attempt is unsuccessful.
+        }
     }, [auth]);
 
     // Smoothly display the login screen

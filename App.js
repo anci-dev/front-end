@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, Animated, Easing } from 'react-native';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,13 +10,15 @@ import { Dashboard } from './views/Dashboard'
 import { Settings } from './views/Settings'
 import { RepoStatus } from './views/RepoStatus'
 import { BuildStatus } from './views/BuildStatus'
+import styles from './static/Style'
 
+const Cookies = require('js-cookie');
 const RootStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 // From any Drawer screen, access authentication props via "props.route.params.auth"
 function LandingPad(props) {
-    const fade = useRef(new Animated.Value(0)).current
+    const fade = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         Animated.timing(fade, {
@@ -29,6 +31,12 @@ function LandingPad(props) {
     return (
         <View style={{flex: 1, backgroundColor: "#212128"}}>
             <Animated.View style={{flex: 1, opacity: fade}}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                            Cookies.remove("auth");
+                            props.route.params.setAuth({});
+                        }}>
+                    <Text style={styles.buttonText}>Log out</Text>
+                </TouchableOpacity>
                 <Drawer.Navigator initialRouteName="Dashboard"
                         drawerType={"permanent"}
                         drawerStyle={{backgroundColor: "#212128"}}
