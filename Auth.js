@@ -40,6 +40,21 @@ function getAuth(setAuth, setProcessing) {
             setProcessing(false);
         }
     }
+
+    // watch for aborted login attempts
+    // might not be possible to catch users who navigate to a different page...
+    var checkLoginState = setInterval(() => {
+        try {
+            if (!tab || tab.closed !== false) {
+                setProcessing(false);
+                clearInterval(checkLoginState);
+            }
+        } catch (error) {
+
+        }
+    }, 500);
+
+
 }
 
 function LoginButton(props) {

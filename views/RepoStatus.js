@@ -8,11 +8,11 @@ export function RepoStatus(props) {
         // console.log(item);
 
         return (
-            <Text style={styles.repoOverview}>
+            <View style={styles.repoOverview}>
                 <Image style={styles.profileImage} source={item.owner.avatar_url}/>
-                <Text>{item.name} </Text>
-                <Text onPress={() => window.open(item.html_url)}>({item.full_name})</Text>
-            </Text>
+                <Text style={styles.repoName}>{item.name}</Text>
+                <Text style={styles.repoName} onPress={() => window.open(item.html_url)}>({item.full_name})</Text>
+            </View>
         );
     }
 

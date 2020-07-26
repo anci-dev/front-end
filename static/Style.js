@@ -48,6 +48,7 @@ const globalStyle = {
         height: 50,
         width: 50,
         resizeMode: "contain",
+        borderRightWidth: 2,
     },
     repoOverview: {
         backgroundColor: colors.contrast,
@@ -55,6 +56,15 @@ const globalStyle = {
         borderColor: colors.base,
         borderWidth: 2,
         marginTop: 5,
+
+        flex: 1,
+        alignItems: "center",
+        flexDirection: "row",
+    },
+    repoName: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginLeft: 10,
     },
 };
 
