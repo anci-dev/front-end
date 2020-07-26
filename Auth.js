@@ -11,13 +11,14 @@ const COOKIE_OPTIONS = {
 
 const LocalBackend = "http://localhost:3000";
 const RemoteBackend = "https://ancitesting.herokuapp.com";
+const Backend = window.location.origin.indexOf("localhost") > -1 ? LocalBackend : RemoteBackend;
 
 function getAuth(setAuth, setProcessing) {
     setProcessing(true);
 
     // List scopes as space-delimited values
     const scopes = "scope=repo";
-    const query = `client_id=13f6352ecd93ee690191&redirectUri=${window.location.origin.indexOf("localhost") > -1 ? LocalBackend : RemoteBackend}/auth/get_code`
+    const query = `client_id=13f6352ecd93ee690191&redirectUri=${Backend}/auth/get_code`
     const url = `https://github.com/login/oauth/authorize?${query}&${scopes}`;
     const tab = window.open(url);
 
@@ -25,7 +26,7 @@ function getAuth(setAuth, setProcessing) {
     window.addEventListener("message", recieveMessage, false);
 
     function recieveMessage(event) {
-        if (event.origin !== (window.location.origin.indexOf("localhost") > -1 ? LocalBackend : RemoteBackend)) {
+        if (event.origin !== Backend) {
             console.log("Wrong domain!");
         } else {
             tab.close();
@@ -69,4 +70,4 @@ function LoginButton(props) {
     );
 }
 
-export {LoginButton};
+export {LoginButton, Backend};

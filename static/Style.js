@@ -52,7 +52,6 @@ const globalStyle = {
     },
     repoOverview: {
         backgroundColor: colors.contrast,
-        color: colors.base,
         borderColor: colors.base,
         borderWidth: 2,
         marginTop: 5,
@@ -65,7 +64,17 @@ const globalStyle = {
         fontSize: 20,
         fontWeight: "bold",
         marginLeft: 10,
+
+        color: colors.base,
     },
+    fullRepoName: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginLeft: "auto",
+        marginRight: 10,
+
+        color: colors.base,
+    }
 };
 
 export default StyleSheet.create(globalStyle);
