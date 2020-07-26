@@ -28,6 +28,8 @@ function LandingPad(props) {
         }).start();
     }, [fade]);
 
+    console.log(props);
+
     return (
         <View style={{flex: 1, backgroundColor: "#212128"}}>
             <Animated.View style={{flex: 1, opacity: fade}}>

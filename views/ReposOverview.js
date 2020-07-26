@@ -3,9 +3,7 @@ import { TouchableOpacity, Image, SectionList, StyleSheet, Text, View, Button, A
 import styles from '../static/Style';
 import { Backend } from '../Auth';
 
-const Cookies = require('js-cookie');
-
-export function ReposOverview({ navigation, props }) {
+export function ReposOverview({ navigation, route }) {
 
     function reposWithCI(data) {
         var hasCI = [];
@@ -42,7 +40,7 @@ export function ReposOverview({ navigation, props }) {
     const [ repos, setRepos ] = useState([]);
 
     useEffect(() => {
-        fetch(`${Backend}/db/repo_status?access_token=${Cookies.getJSON("auth").access_token}`, {
+        fetch(`${Backend}/db/repo_status?access_token=${route.params.auth.access_token}`, {
             method: "GET",
         })
         .then(resp => resp.json())
