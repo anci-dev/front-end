@@ -12,7 +12,11 @@ const styles = {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: colors.base,
+    },
+    header: {
+        height: 54,
+        width: "100%",
+        backgroundColor: colors.baseDark,
     },
     title: {
         fontSize: 35,
@@ -42,6 +46,18 @@ const styles = {
         left: 20,
         bottom: 20,
         zIndex: 1,
+    },
+    backButton: {
+        backgroundColor: colors.base,
+        borderColor: colors.baseDark,
+        borderWidth: 2,
+        marginRight: "auto",
+    },
+    backButtonImage: {
+        height: 30,
+        width: 50,
+        resizeMode: "contain",
+        margin: 10,
     },
     logo: {
         height: 450,
@@ -85,7 +101,9 @@ const styles = {
         marginRight: 10,
 
         color: colors.base,
-    }
+    },
+
+
 };
 
 const globalStyle = StyleSheet.create(styles);
