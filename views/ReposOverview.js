@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, Image, SectionList, StyleSheet, Text, View, Button, Alert } from 'react-native';
-import styles from '../static/Style';
+import { globalStyle } from '../static/Style';
 import { Backend } from '../Auth';
 
 export function ReposOverview({ navigation, route }) {
@@ -29,10 +29,10 @@ export function ReposOverview({ navigation, route }) {
 
     function renderRepo(repo) {
         return (
-            <TouchableOpacity style={styles.repoOverview} onPress={() => navigation.navigate("RepoDetails", {repo})}>
-                <Image style={styles.profileImage} source={repo.owner.avatar_url}/>
-                <Text style={styles.repoName}>{repo.name}</Text>
-                <Text style={styles.fullRepoName} onPress={() => window.open(repo.html_url)}>({repo.full_name})</Text>
+            <TouchableOpacity style={globalStyle.repoOverview} onPress={() => navigation.navigate("RepoDetails", {repo})}>
+                <Image style={globalStyle.profileImage} source={repo.owner.avatar_url}/>
+                <Text style={globalStyle.repoName}>{repo.name}</Text>
+                <Text style={globalStyle.fullRepoName} onPress={() => window.open(repo.html_url)}>({repo.full_name})</Text>
             </TouchableOpacity>
         );
     }
@@ -51,15 +51,14 @@ export function ReposOverview({ navigation, route }) {
     }, []);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Repo Status!</Text>
+        <View style={globalStyle.container}>
             <SectionList
                 renderItem={({item}) => renderRepo(item)}
                 keyExtractor={item => item.id.toString()}
-                style={styles.list}
+                style={globalStyle.list}
 
                 renderSectionHeader={({ section: { title } }) => (
-                <Text style={styles.title}>{title}</Text>
+                <Text style={globalStyle.title}>{title}</Text>
                 )}
                 sections={[
                     { title: 'Repos with CI (currently randomly determined in anci db.js)', data: reposWithCI(repos) },

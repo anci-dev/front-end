@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import GitHubLogin from 'react-github-login';
 import PopupWindow from 'react-github-login/src/PopupWindow'
 import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
-import styles from './static/Style'
+import { globalStyle } from './static/Style'
 
 const Cookies = require('js-cookie');
 const COOKIE_OPTIONS = {
@@ -64,8 +64,8 @@ function LoginButton(props) {
     return processing ? (
         <ActivityIndicator size="large" color="#2a70f0" style={{margin: 25}}/>
     ) : (
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => getAuth(props.setAuth, setProcessing)}>
-            <Text style={styles.buttonText}>Log in</Text>
+        <TouchableOpacity style={globalStyle.buttonContainer} onPress={() => getAuth(props.setAuth, setProcessing)}>
+            <Text style={globalStyle.buttonText}>Log in</Text>
         </TouchableOpacity>
     );
 }

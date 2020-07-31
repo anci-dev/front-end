@@ -10,7 +10,7 @@ import { Dashboard } from './views/Dashboard'
 import { Settings } from './views/Settings'
 import { RepoStatus } from './views/RepoStatus'
 import { BuildStatus } from './views/BuildStatus'
-import styles from './static/Style'
+import { globalStyle, colors } from './static/Style'
 
 const Cookies = require('js-cookie');
 const RootStack = createStackNavigator();
@@ -31,20 +31,20 @@ function LandingPad(props) {
     console.log(props);
 
     return (
-        <View style={{flex: 1, backgroundColor: "#212128"}}>
+        <View style={{flex: 1, backgroundColor: colors.base}}>
             <Animated.View style={{flex: 1, opacity: fade}}>
-                <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                <TouchableOpacity style={globalStyle.logoutButton} onPress={() => {
                             Cookies.remove("auth");
                             props.route.params.setAuth({});
                         }}>
-                    <Text style={styles.buttonText}>Log out</Text>
+                    <Text style={globalStyle.buttonText}>Log out</Text>
                 </TouchableOpacity>
                 <Drawer.Navigator initialRouteName="Repo Status"
                         drawerType={"permanent"}
-                        drawerStyle={{backgroundColor: "#212128"}}
+                        drawerStyle={{backgroundColor: colors.baseDark, borderRightWidth: 0}}
                         drawerContentOptions={{
-                            activeTintColor: "#2a70f0",
-                            inactiveTintColor: "#97BEE5",
+                            activeTintColor: colors.highlight,
+                            inactiveTintColor: colors.contrast,
                         }}>
                     <Drawer.Screen name="Dashboard" component={Dashboard} initialParams={props.route.params}/>
                     <Drawer.Screen name="Repo Status" component={RepoStatus} initialParams={props.route.params}/>

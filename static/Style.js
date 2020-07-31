@@ -2,15 +2,17 @@ import { StyleSheet } from 'react-native';
 
 const colors = {
     base: '#212128',
+    baseDark: '#09090E',
     contrast: '#97BEE5',
     highlight: '#2a70f0',
 }
 
-const globalStyle = {
+const styles = {
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: colors.base,
     },
     title: {
         fontSize: 35,
@@ -34,6 +36,13 @@ const globalStyle = {
         borderWidth: 4,
         borderColor: colors.base,
     },
+    logoutButton: {
+        backgroundColor: colors.highlight,
+        position: "absolute",
+        left: 20,
+        bottom: 20,
+        zIndex: 1,
+    },
     logo: {
         height: 450,
         width: 150,
@@ -47,14 +56,16 @@ const globalStyle = {
     profileImage: {
         height: 50,
         width: 50,
-        resizeMode: "contain",
+        resizeMode: "cover",
         borderRightWidth: 2,
     },
     repoOverview: {
         backgroundColor: colors.contrast,
-        borderColor: colors.base,
+        borderColor: colors.baseDark,
         borderWidth: 2,
         marginTop: 5,
+        borderTopRightRadius: 15,
+        borderBottomRightRadius: 15,
 
         flex: 1,
         alignItems: "center",
@@ -77,4 +88,6 @@ const globalStyle = {
     }
 };
 
-export default StyleSheet.create(globalStyle);
+const globalStyle = StyleSheet.create(styles);
+
+export {globalStyle, colors};

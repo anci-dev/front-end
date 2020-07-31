@@ -11,7 +11,7 @@ export function RepoStatus(props) {
     return (
         <RootStack.Navigator initialRouteName="ReposOverview">
             <RootStack.Screen name="ReposOverview" component={ReposOverview} initialParams={props.route.params} options={{headerShown: false}}/>
-            <RootStack.Screen name="RepoDetails" component={RepoDetails} initialParams={props.route.params}/>
+            <RootStack.Screen name="RepoDetails" component={RepoDetails} initialParams={props.route.params} options={{headerShown: false}}/>
         </RootStack.Navigator>
     );
 }

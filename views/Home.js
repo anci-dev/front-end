@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, Image, Animated, Easing } from 'react-native';
-import styles from '../static/Style'
+import { TouchableOpacity, globalStyleheet, Text, View, Image, Animated, Easing } from 'react-native';
+import { globalStyle } from '../static/Style'
 import { LoginButton } from '../Auth'
 import logo from '../static/images/logo1.png'
 
@@ -30,12 +30,12 @@ export function Home({ navigation }) {
     }, [fade]);
 
     return (
-        <View style={styles.base}>
-            <Animated.View style={[styles.base, {opacity: fade}]}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>Welcome to anci!</Text>
+        <View style={globalStyle.base}>
+            <Animated.View style={[globalStyle.base, {opacity: fade}]}>
+                <View style={globalStyle.container}>
+                    <Text style={globalStyle.title}>Welcome to anci!</Text>
                     <LoginButton setAuth={setAuth} />
-                    <Image source={logo} style={styles.logo}/>
+                    <Image source={logo} style={globalStyle.logo}/>
                 </View>
             </Animated.View>
         </View>
