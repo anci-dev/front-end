@@ -23,6 +23,15 @@ const styles = {
         fontWeight: "bold",
         color: colors.contrast,
     },
+    subtitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: colors.contrast,
+    },
+    text: {
+        fontSize: 18,
+        color: colors.contrast,
+    },
     base: {
         backgroundColor: colors.base,
         height: "100%",
@@ -73,37 +82,16 @@ const styles = {
         height: 50,
         width: 50,
         resizeMode: "cover",
-        borderRightWidth: 2,
+        margin: 10,
     },
-    repoOverview: {
-        backgroundColor: colors.contrast,
-        borderColor: colors.baseDark,
-        borderWidth: 2,
-        marginTop: 5,
-        borderTopRightRadius: 15,
-        borderBottomRightRadius: 15,
+    listItem: {
+        borderColor: colors.contrast,
+        borderTopWidth: 1,
 
         flex: 1,
         alignItems: "center",
         flexDirection: "row",
     },
-    repoName: {
-        fontSize: 20,
-        fontWeight: "bold",
-        marginLeft: 10,
-
-        color: colors.base,
-    },
-    fullRepoName: {
-        fontSize: 20,
-        fontWeight: "bold",
-        marginLeft: "auto",
-        marginRight: 10,
-
-        color: colors.base,
-    },
-
-
 };
 
 const globalStyle = StyleSheet.create(styles);

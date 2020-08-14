@@ -29,10 +29,12 @@ export function ReposOverview({ navigation, route }) {
 
     function renderRepo(repo) {
         return (
-            <TouchableOpacity style={globalStyle.repoOverview} onPress={() => navigation.navigate("RepoDetails", {repo})}>
+            <TouchableOpacity style={globalStyle.listItem} onPress={() => navigation.navigate("RepoDetails", {repo})}>
                 <Image style={globalStyle.profileImage} source={repo.owner.avatar_url}/>
-                <Text style={globalStyle.repoName}>{repo.name}</Text>
-                <Text style={globalStyle.fullRepoName} onPress={() => window.open(repo.html_url)}>({repo.full_name})</Text>
+                <View>
+                    <Text style={globalStyle.subtitle}>{repo.name}</Text>
+                    <Text style={globalStyle.text}>{repo.owner.login}</Text>
+                </View>
             </TouchableOpacity>
         );
     }
