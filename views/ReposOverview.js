@@ -46,7 +46,7 @@ export function ReposOverview({ navigation, route }) {
     useEffect(() => {
         // use setLoading if we need to run this effect again
         // setLoading(true);
-        fetch(`${Backend}/db/repo_status?access_token=${route.params.auth.access_token}`, {
+        fetch(`${Backend}/api/repo_status?access_token=${route.params.auth.access_token}`, {
             method: "GET",
         })
         .then(resp => resp.json())
@@ -72,7 +72,7 @@ export function ReposOverview({ navigation, route }) {
                 <Text style={globalStyle.title}>{title}</Text>
                 )}
                 sections={[
-                    { title: 'Repos with CI (currently randomly determined in anci db.js)', data: reposWithCI(repos) },
+                    { title: 'Repos with CI', data: reposWithCI(repos) },
                     { title: 'Repos without CI', data: reposWithoutCI(repos) },
                 ]}
             />
