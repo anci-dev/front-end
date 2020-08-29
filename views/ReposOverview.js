@@ -46,7 +46,7 @@ export function ReposOverview({ navigation, route }) {
     useEffect(() => {
         // use setLoading if we need to run this effect again
         // setLoading(true);
-        fetch(`${Backend}/api/repo_status?access_token=${route.params.auth.access_token}`, {
+        fetch(`${Backend}/api/getAllRepos?access_token=${route.params.auth.access_token}`, {
             method: "GET",
         })
         .then(resp => resp.json())
