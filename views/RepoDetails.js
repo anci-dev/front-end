@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { FlatList, TouchableOpacity, Image, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { globalStyle, colors } from '../static/Style';
 import backArrow from '../static/images/back_arrow.png'
@@ -8,46 +8,66 @@ const Cookies = require('js-cookie');
 
 export function RepoDetails( {route, navigation} ) {
 
-    const [builds, setBuilds] = useState([]);
+    const [buildData, dispatchBuildData] = useReducer((state, {type, data}) => {
+        switch(type) {
+            case "set":
+                return {
+                    repos: data,
+                    loading: false
+                }
 
-    const [loading, setLoading] = useState(true);
+            case "unload":
+                return {
+                    repos: [],
+                    loading: true
+                }
 
+            default:
+                return state;
+        }
+    }, {
+        repos: [],
+        loading: true,
+    });
+
+    // use setLoading if we need to run this effect again
+    // setLoading(true);
     useEffect(() => {
-        // use setLoading if we need to run this effect again
-        // setLoading(true);
+        // Ignore update when loading is set to false
+        if(!buildData.loading) return;
+
         fetch(`${Backend}/api/getBuilds?repo=${route.params.repo.id}`, {
             method: "GET",
         })
         .then(resp => resp.json())
         .then(data => {
-            setBuilds(data);
-            setLoading(false);
+            dispatchBuildData({
+                type: "set",
+                data
+            });
         });
-    }, []);
+    }, [buildData.loading]);
 
-    function renderBuild(build) {
-        return (
-            <View>
-                <Text>{build.status}</Text>
-                <Text>{build.output}</Text>
-            </View>
-        );
-    }
+    const renderBuild = build => (
+        <View>
+            <Text>{build.status}</Text>
+            <Text>{build.output}</Text>
+        </View>
+    );
 
-    function BuildList() {
-        return loading ? (
-            <View style={globalStyle.container, globalStyle.base}>
-                <ActivityIndicator size="large" color="#2a70f0" style={{margin: 200}}/>
-            </View>
-        ) : (
-            <FlatList
-                data={builds}
-                renderItem={({item}) => renderBuild(item)}
-                keyExtractor={item => item.id.toString()}
-                style={globalStyle.list}
-            />
-        );
-    }
+    const BuildList = () => buildData.loading ? (
+        <View style={globalStyle.container, globalStyle.base}>
+            <ActivityIndicator size="large" color="#2a70f0" style={{margin: 200}}/>
+        </View>
+    ) : (
+        <FlatList
+            data={buildData.builds}
+            renderItem={({item}) => renderBuild(item)}
+            keyExtractor={item => item.id.toString()}
+            style={globalStyle.list}
+        />
+    );
+
     // Need:
     // Current status
     // Activate repo / take over payment
@@ -57,7 +77,6 @@ export function RepoDetails( {route, navigation} ) {
 
     var status = route.params.repo.status || "Inactive";
     return (
-
         <View style={globalStyle.base}>
             <View style={globalStyle.header}>
                 <TouchableOpacity style={globalStyle.backButton} onPress={() => navigation.navigate("ReposOverview")}>

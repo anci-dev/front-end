@@ -7,7 +7,6 @@ import { RepoDetails } from './RepoDetails';
 const RootStack = createStackNavigator();
 
 export function RepoStatus(props) {
-    console.log(props);
     return (
         <RootStack.Navigator initialRouteName="ReposOverview">
             <RootStack.Screen name="ReposOverview" component={ReposOverview} initialParams={props.route.params} options={{headerShown: false}}/>
