@@ -9,7 +9,7 @@ const COOKIE_OPTIONS = {
     expires: 1, // Auth cookie expires after 1 day
 }
 
-const LocalBackend = "http://localhost:3000";
+const LocalBackend = "https://localhost:3000";
 const RemoteBackend = "https://ancitesting.herokuapp.com";
 const Backend = window.location.origin.indexOf("localhost") > -1 ? LocalBackend : RemoteBackend;
 
@@ -26,6 +26,8 @@ function getAuth(setAuth, setProcessing) {
     window.addEventListener("message", recieveMessage, false);
 
     function recieveMessage(event) {
+        console.log(event.origin);
+        console.log(Backend);
         if (event.origin !== Backend) {
             console.log("Wrong domain!");
         } else {
@@ -54,8 +56,6 @@ function getAuth(setAuth, setProcessing) {
 
         }
     }, 500);
-
-
 }
 
 function LoginButton(props) {
@@ -70,4 +70,23 @@ function LoginButton(props) {
     );
 }
 
-export {LoginButton, Backend};
+
+function syncStripe() {
+    const query = `response_type=code&client_id=ca_HvmqBPFiAuVrB8Fa2QQ4O9Md4F48fZCU&scope=read_write`;
+    const url = `https://connect.stripe.com/oauth/authorize?${query}`;
+    const tab = window.open(url);
+}
+
+function SyncStripeButton() {
+    const [processing, setProcessing] = useState(false);
+
+    return processing ? (
+        <ActivityIndicator size="large" color="#2a70f0" style={{margin: 25}}/>
+    ) : (
+        <TouchableOpacity style={globalStyle.buttonContainer} onPress={() => syncStripe()}>
+            <Text style={globalStyle.buttonText}>Add Stripe to Account</Text>
+        </TouchableOpacity>
+    );
+}
+
+export {LoginButton, Backend, SyncStripeButton};
