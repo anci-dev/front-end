@@ -71,20 +71,29 @@ function LoginButton(props) {
 }
 
 
-function syncStripe() {
-    const query = `response_type=code&client_id=ca_HvmqBPFiAuVrB8Fa2QQ4O9Md4F48fZCU&scope=read_write`;
-    const url = `https://connect.stripe.com/oauth/authorize?${query}`;
-    const tab = window.open(url);
+function setUpStripe(access_token) {
+    console.log(access_token);
+    fetch(`${Backend}/api/createStripeCustomer`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({access_token: access_token})
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data);
+    });
 }
 
-function SyncStripeButton() {
+function SyncStripeButton(props) {
     const [processing, setProcessing] = useState(false);
 
     return processing ? (
         <ActivityIndicator size="large" color="#2a70f0" style={{margin: 25}}/>
     ) : (
-        <TouchableOpacity style={globalStyle.buttonContainer} onPress={() => syncStripe()}>
-            <Text style={globalStyle.buttonText}>Add Stripe to Account</Text>
+        <TouchableOpacity style={globalStyle.buttonContainer} onPress={() => setUpStripe(props.access_token)}>
+            <Text style={globalStyle.buttonText}>Set Up Account for Payments</Text>
         </TouchableOpacity>
     );
 }
