@@ -13,6 +13,8 @@
     "@react-navigation/drawer": "^5.8.1",
     "@react-navigation/native": "^5.5.0",
     "@react-navigation/stack": "^5.4.1",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.9.0",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
     "js-cookie": "^2.2.1",

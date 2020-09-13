@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import GitHubLogin from 'react-github-login';
 import PopupWindow from 'react-github-login/src/PopupWindow'
-import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native';
 import { globalStyle } from './static/Style'
+
+import {Elements, CardElement} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+const stripePromise = loadStripe("pk_test_51HEn6TIXCgM7c7D0FeZCTyK4iem7YTi0qPoMrzIdgE290lMQXb5qAJKBclBEFFvFsHpHzHBvbmz0huG6jKz8n9d400QuKwVucA");
 
 const Cookies = require('js-cookie');
 const COOKIE_OPTIONS = {
@@ -86,7 +90,7 @@ function setUpStripe(access_token) {
     });
 }
 
-function SyncStripeButton(props) {
+function AddPaymentMethod(props) {
     const [processing, setProcessing] = useState(false);
 
     return processing ? (
@@ -98,4 +102,32 @@ function SyncStripeButton(props) {
     );
 }
 
-export {LoginButton, Backend, SyncStripeButton};
+const CARD_ELEMENT_OPTIONS = {
+    style: {
+        base: {
+            color: "#32325d",
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: "antialiased",
+            fontSize: "16px",
+            "::placeholder": {
+                color: "#aab7c4",
+            },
+        },
+        invalid: {
+            color: "#fa755a",
+            iconColor: "#fa755a",
+        },
+    },
+};
+
+function AddPaymentMethod2(props) {
+    return (
+        <Elements stripe={stripePromise}>
+            <View style={globalStyle.creditCardInput}>
+                <CardElement options={CARD_ELEMENT_OPTIONS}/>
+            </View>
+        </Elements>
+    );
+}
+
+export {LoginButton, Backend, AddPaymentMethod, AddPaymentMethod2};

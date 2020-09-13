@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import { globalStyle } from '../static/Style'
-import { SyncStripeButton } from '../Auth';
+import { AddPaymentMethod, AddPaymentMethod2 } from '../Auth';
 
 export function Settings({ route }) {
 
@@ -9,7 +9,8 @@ export function Settings({ route }) {
         <View>
             <View style={globalStyle.container}>
                 <Text style={globalStyle.title}>Settings!</Text>
-                <SyncStripeButton access_token={route.params.auth.access_token}/>
+                <AddPaymentMethod access_token={route.params.auth.access_token}/>
+                <AddPaymentMethod2 />
             </View>
         </View>
     );

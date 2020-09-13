@@ -10,8 +10,6 @@ const colors = {
 const styles = {
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
     },
     header: {
         height: 54,
@@ -91,6 +89,10 @@ const styles = {
         flex: 1,
         alignItems: "center",
         flexDirection: "row",
+    },
+    creditCardInput: {
+        width: 200,
+        height: 20,
     },
 };
 
